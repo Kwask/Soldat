@@ -1,0 +1,65 @@
+* SERVER VERSION 2.7.8 - GAME VERSION 1.6.8*
+
+- Added SC3 function StrToDateTime(const S: string): TDateTime;
+- Added SC3 event TGame.OnTCPCommand(Ip: string; Port: Word; Command: string): Boolean;
+- Added SC3 event TActivePlayer.OnKitPickup(Player: TActivePlayer; Kit: TActiveMapObject)
+- Added SC3 event TActivePlayer.OnFlagDrop(Player: TActivePlayer; Flag: TActiveFlag; Team: Byte; Thrown: Boolean)
+- Added SC3 procedure TActivePlayer.WorldText(Layer: Byte; Text: string; Delay: Integer; Color: Longint; Scale, X, Y: Single)
+- Added SC3 procedure TPlayers.WorldText(Layer: Byte; Text: string; Delay: Integer; Color: Longint; Scale, X, Y: Single)
+- Added SC3 procedure TGame.TOnAdminConnect(Ip: string; Port: Word)
+- Added SC3 procedure TGame.TOnAdminDisconnect(Ip: string; Port: Word)
+- Added SC3 procedure TActivePlayer.SetVelocity(VelX, VelY: Single)
+- Added SC3 function TGame.TOnAdminCommand(Player: TActivePlayer; Command: string): boolean
+- Added SC3 function TGame.TOnTCPMessage(Ip: string; Port: Word; Text: string): boolean
+- Added SC3 function TMap.CreateBulletVector(A, B: TVector; HitM: Single; sStyle: Byte; Owner: TActivePlayer): Integer
+- Added SC3 function TMap.CreateBullet(X, Y, VelX, VelY, HitM_ Single; sStyle: Byte; Owner: TActivePlayer): Integer
+- Added SC3 function Distance(X1, X2, Y1, Y2: Single): Single
+- Added SC3 property TActivePlayer.IsAdmin (read write - Boolean)
+- Added SC3 property TGame.CurrentMap (read only - string)
+- Added SC3 class TMapsList (accessible over global variable "Game.MapsList")
+- Added SC3 procedure TMapsList.AddMap(Name: string)
+- Added SC3 procedure TMapsList.RemoveMap(Name: string)
+- Added SC3 function TMapsList.GetMapIdByName(Name: string): Integer
+- Added SC3 property TMapsList.Map (read only - array of string)
+- Added SC3 property TMapsList.CurrentMapId (read write - Integer)
+- Added SC3 property TMapsList.MapsCount (read only - Integer)
+- Added SC3 class TGlobal (accessible over global variable "Global")
+- Added SC3 property TGlobal.DateSeparator (read write - string)
+- Added SC3 property TGlobal.ShortDateFormat (read write - string)
+- Added SC3 class TActiveMapBullet (accessible over global Byte array "Map.Bullets")
+- Added SC3 function TActiveMapBullet.GetOwnerWeaponId: Integer
+- Added SC3 property TActiveMapBullet.ID (read only - Byte)
+- Added SC3 property TActiveMapBullet.Active (read only - Boolean)
+- Added SC3 property TActiveMapBullet.X (read only - Single)
+- Added SC3 property TActiveMapBullet.Y (read only - Single)
+- Added SC3 property TActiveMapBullet.VelX (read only - Single)
+- Added SC3 property TActiveMapBullet.VelY (read only - Single)
+- Modified SC3 type TOnKillEvent declaration to procedure(Killer, Victim: TActivePlayer; BulletID: Byte)
+- Modified SC3 type TOnTCPMessageEvent declaration to procedure(Ip: string; Port: Word; Message: string)
+- Modified request game log line from "IP:PORT requesting game..." to "IP:PORT|HWID requesting game..."
+- Modified SC3 procedure name TActivePlayer.Forward altered to TActivePlayer.ForwardTo
+- Modified SC3 type TOnRequestEvent declaration to function(Ip, Hw: string; Port: Word; State: Byte; Forwarded: Boolean; Password: string): Integer
+- Modified SC3 type TOnDamageEvent declaration to function(Shooter, Victim: TActivePlayer; Damage: Integer; Bullet: TActiveMapBullet): Integer
+- Fixed DrawText result does not hide after server change #562
+- Fixed TOnWeaponChangeEvent does not hold valueable data #582
+- Fixed TActiveObject's Style is 0 (Flags) #584
+- Fixed TPlayer.OnFlagDrop Flag.ID can't be accessed or duplicates #585
+- Fixed Player.Alive := FALSE deals damage (doesn't always kill) #586
+- Fixed MovePlayer causes players to drop weapons and flags randomly #142
+- Fixed MovePlayer randomly kills and respawns player #247
+- Fixed Server refuses client if MovePlayer is used on connection #587
+- Fixed SC3 TMapObject.Style results to be the same as in wiki
+- Fixed SC3 using Game.OnRequest crashes server
+- Fixed SC3 Variable Game.VotePercent is always set up on 0 #532
+- Fixed SC3 Player.Ban always bans for 0 minutes #576
+- Fixed OnVoteMap/OnVoteMapStart events are not working as intended #550
+- Fixed SC3 - OnWeaponChange does not provide changed weapon information #577
+- Fixed SC3 - TPlayer.OnKill/TPlayer.OnDamage - WeaponType is unpredictable #356
+- Fixed TActivePlayer.BigText with layer 0 causes WriteConsole behaviour #400
+- Fixed SC3 StrToDate doesn't work as intended #401
+- Fixed /recompile <script> hangs up admin client #578
+- Fixed SC3 Strange RayCast values when walking "into" the wall #395
+- Fixed DELMAP crashes server #410
+- Fixed command delmap to also check for first map on mapslist
+- Fixed SC3 some server crashes after unhandled exception
+- Fixed SC3 some function results could be ignored in some cases
